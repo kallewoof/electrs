@@ -44,6 +44,7 @@ fn run_server(config: Arc<Config>) -> Result<()> {
     let daemon = Arc::new(Daemon::new(
         &config.daemon_dir,
         config.daemon_rpc_addr,
+        config.magic,
         config.cookie_getter(),
         config.network_type,
         signal.clone(),

@@ -23,6 +23,7 @@ pub struct Config {
     pub db_path: PathBuf,
     pub daemon_dir: PathBuf,
     pub daemon_rpc_addr: SocketAddr,
+    pub magic: u32,
     pub cookie: Option<String>,
     pub electrum_rpc_addr: SocketAddr,
     pub http_addr: SocketAddr,
@@ -104,6 +105,12 @@ impl Config {
                 Arg::with_name("daemon_rpc_addr")
                     .long("daemon-rpc-addr")
                     .help("Bitcoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:8332 for mainnet, 127.0.0.1:18332 for testnet and 127.0.0.1:18443 for regtest)")
+                    .takes_value(true),
+            )
+            .arg(
+                Arg::with_name("magic")
+                    .long("magic")
+                    .help("Bitcoin magic")
                     .takes_value(true),
             )
             .arg(
@@ -228,12 +235,21 @@ impl Config {
             #[cfg(feature = "liquid")]
             Network::LiquidRegtest => 44224,
         };
+        let default_magic = match network_type {
+            Network::Bitcoin => "D9B4BEF9",
+            Network::Testnet => "0709110B",
+            Network::Regtest => "DAB5BFFA",
+        };
 
         let daemon_rpc_addr: SocketAddr = m
             .value_of("daemon_rpc_addr")
             .unwrap_or(&format!("127.0.0.1:{}", default_daemon_port))
             .parse()
             .expect("invalid Bitcoind RPC address");
+        let magic_s = m
+            .value_of("magic")
+            .unwrap_or(default_magic);
+        let magic: u32 = u32::from_str_radix(magic_s, 16).unwrap();
         let electrum_rpc_addr: SocketAddr = m
             .value_of("electrum_rpc_addr")
             .unwrap_or(&format!("127.0.0.1:{}", default_electrum_port))
@@ -288,6 +304,7 @@ impl Config {
             db_path,
             daemon_dir,
             daemon_rpc_addr,
+            magic,
             cookie,
             electrum_rpc_addr,
             http_addr,

@@ -32,6 +32,7 @@ fn main() {
         Daemon::new(
             &config.daemon_dir,
             config.daemon_rpc_addr,
+	    config.magic,
             config.cookie_getter(),
             config.network_type,
             signal.clone(),
