@@ -39,7 +39,7 @@ num_cpus = "1.0"
 page_size = "0.4"
 prometheus = "0.7"
 rayon = "1.0"
-rocksdb = "0.12.1"
+rocksdb = "0.13.0"
 rust-crypto = "0.2"
 serde = "1.0"
 serde_derive = "1.0"
@@ -50,8 +50,10 @@ time = "0.1"
 tiny_http = "0.6"
 url = "2.1"
 
+
 [dependencies.bitcoin]
-version = "0.19.1"
+git = "http://github.com/kallewoof/rust-bitcoin"
+branch = "2019-07-signet"
 features = ["use-serde"]
 
 [dependencies.elements]

@@ -51,12 +51,12 @@ impl<'a> Iterator for ReverseScanIterator<'a> {
             return None;
         }
 
-        let key = self.iter.key().unwrap();
+        let key = self.iter.key().unwrap().to_vec();
         if !key.starts_with(&self.prefix) {
             self.done = true;
             return None;
         }
-        let value = self.iter.value().unwrap();
+        let value = self.iter.value().unwrap().to_vec();
 
         self.iter.prev();
 

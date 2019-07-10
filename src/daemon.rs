@@ -303,7 +303,6 @@ impl Daemon {
         daemon_rpc_addr: SocketAddr,
         magic: u32,
         cookie_getter: Arc<dyn CookieGetter>,
-        cookie_getter: Arc<CookieGetter>,
         network: Network,
         signal: Waiter,
         metrics: &Metrics,

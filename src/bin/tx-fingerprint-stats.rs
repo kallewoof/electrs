@@ -52,7 +52,7 @@ fn main() {
 
     while iter.valid() {
         let key = iter.key().unwrap();
-        let value = iter.value().unwrap();
+        let value = iter.value().unwrap().to_vec();
 
         if !key.starts_with(b"T") {
             break;

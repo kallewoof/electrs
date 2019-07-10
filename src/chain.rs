@@ -22,6 +22,7 @@ pub use confidential::Value;
 pub enum Network {
     Bitcoin,
     Testnet,
+    Signet,
     Regtest,
 
     #[cfg(feature = "liquid")]
@@ -40,6 +41,7 @@ impl Network {
         match self {
             Network::Bitcoin => 0xD9B4BEF9,
             Network::Testnet => 0x0709110B,
+            Network::Signet  => 0xA553C67E,
             Network::Regtest => 0xDAB5BFFA,
 
             #[cfg(feature = "liquid")]
@@ -64,6 +66,7 @@ impl Network {
         return vec![
             "mainnet".to_string(),
             "testnet".to_string(),
+            "signet".to_string(),
             "regtest".to_string(),
         ];
 
@@ -71,6 +74,7 @@ impl Network {
         return vec![
             "mainnet".to_string(),
             "testnet".to_string(),
+            "signet".to_string(),
             "regtest".to_string(),
             "liquid".to_string(),
             "liquidregtest".to_string(),
@@ -83,6 +87,7 @@ impl From<&str> for Network {
         match network_name {
             "mainnet" => Network::Bitcoin,
             "testnet" => Network::Testnet,
+            "signet" => Network::Signet,
             "regtest" => Network::Regtest,
 
             #[cfg(feature = "liquid")]
@@ -100,6 +105,7 @@ impl From<&Network> for BNetwork {
         match network {
             Network::Bitcoin => BNetwork::Bitcoin,
             Network::Testnet => BNetwork::Testnet,
+            Network::Signet => BNetwork::Signet,
             Network::Regtest => BNetwork::Regtest,
 
             #[cfg(feature = "liquid")]
@@ -123,6 +129,7 @@ impl From<&BNetwork> for Network {
             #[cfg(feature = "liquid")]
             BNetwork::Regtest => Network::LiquidRegtest, // @FIXME
             BNetwork::Testnet => Network::Testnet, // @FIXME
+            BNetwork::Signet => Network::Signet, // @FIXME
         }
     }
 }
