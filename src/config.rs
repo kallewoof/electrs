@@ -242,7 +242,7 @@ impl Config {
         let default_magic = match network_type {
             Network::Bitcoin => "D9B4BEF9",
             Network::Testnet => "0709110B",
-            Network::Signet  => "A553C67E",
+            Network::Signet  => "40CF030A",
             Network::Regtest => "DAB5BFFA",
         };
 

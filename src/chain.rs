@@ -41,7 +41,7 @@ impl Network {
         match self {
             Network::Bitcoin => 0xD9B4BEF9,
             Network::Testnet => 0x0709110B,
-            Network::Signet  => 0xA553C67E,
+            Network::Signet  => 0x40CF030A,
             Network::Regtest => 0xDAB5BFFA,
 
             #[cfg(feature = "liquid")]
