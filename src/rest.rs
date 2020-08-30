@@ -1069,9 +1069,9 @@ fn address_to_scripthash(addr: &str, network: &Network) -> Result<FullHash, Http
     #[cfg(feature = "liquid")]
     let is_expected_net = addr.params == network.address_params();
 
-    if !is_expected_net {
-        bail!(HttpError::from("Address on invalid network".to_string()))
-    }
+    // if !is_expected_net {
+    //     bail!(HttpError::from("Address on invalid network".to_string()))
+    // }
 
     Ok(compute_script_hash(&addr.script_pubkey()))
 }
